@@ -1,0 +1,125 @@
+header h2 {
+    grid-area: bar;
+    background-color: #1C6758;
+    padding: 10px 5px 10px 5px;
+    color: var(--quartenary);
+    text-align: center;
+    font-weight: 100;
+}
+
+main {
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+}
+
+main #landing-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+main #landing-content #customer-testimonials {
+    grid-area: testimonial;
+    border: 2px solid var(--primary);
+    text-align: center;
+    padding: 5px;
+    box-sizing:content-box;
+}
+
+main #landing-content #customer-testimonial-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main #landing-content .customer-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main #landing-content .customer-group img {
+    width: 10%;
+    height: 10%;
+}
+
+main #landing-content .customer-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+main #landing-content #pic-text-pair-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    padding: 5px 0 5px 0
+}
+
+main #landing-content .pic-text-pair {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+main #landing-content .pic-text-pair .landing-content-box {
+    max-width: 50%;
+    max-height: 20vh;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-wrap: wrap;
+}
+
+main #landing-content .pic-text-pair .image-box {
+    border: 2px solid var(--primary);
+    max-width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+main #landing-content .pic-text-pair .landing-content-box h4 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+main #landing-content .pic-text-pair .landing-content-box p {
+    font-size: 0.7rem;
+}
+
+.main-popup-button  {
+    font-size: 1.2rem;
+    margin: 2px;
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.popup .input-fields .label-and-textbox {
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    margin: 1%;
+    width: 80%;
+}
+
+.popup .input-fields .label-and-textbox label {
+    word-wrap: break-word;
+    text-align: right;
+    flex: .75;
+}
+
+.popup .input-fields .label-and-textbox input {
+    flex: 2;
+}

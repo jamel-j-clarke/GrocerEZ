@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-title" content="GrocerEZ">
+    <meta name="application-name" content="GrocerEZ">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#1C6758">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" media="screen and (min-width: 611px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 610px)" href="css/mobile_styles.css">
+    <link rel="stylesheet" href="css/item_styles.css">
+    <script src="js/items.js" type="module" defer></script>
+    <script src="js/shared.js" type="module" defer></script>
+    <script src="js/api_clients/HTTPClient.js" type="module"></script>
+    <title>Items</title>
+</head>
+<body>
+    <header>
+        <h1>GrocerEZ</h1>
+        <ul> <!-- Tabs -->
+            <li id="currentListTab">Current List</li>
+            <li id="recipesTab">
+                Recipes
+                <ul> <!-- Recipe Categories -->
+                    <li id="breakfastTab">Breakfast</li>
+                    <li id="lunchTab">Lunch</li>
+                    <li id="snacksTab">Snacks</li>
+                    <li id="dinnerTab">Dinner</li>
+                    <li id="dessertsTab">Desserts</li>
+                    <li id="otherTab">Other</li>
+                </ul>
+            </li>
+            <li id="itemsTab">Items</li>
+            <li id="listsTab">Lists</li>
+        </ul>
+        <div id="user-icon">
+            <a>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAxJJREFUWEfd2F/onmMYB/DPUBLSNMtSDCGkKSyMSSiHLEM4sPzfoi0cCO2AFIUofw+kiGYpSymRJtoc+K9wQP7lzxwhycFs+up+1/t7Pc97308/q1+us7fne33v73M91/297vudZ47FvDmmx/9G0FJcitOwCAtLpX/Gj9iC5/Hu0C8wpEJ74Wqsw9GNC32GB/EU/mrJaRW0Ag/jkBbSDsx3uB6v1PJbBN2C+5h1v+3ANaVavbpqgu7BbbW3Gvj8ZjzQlzNN0BV4ZuBirfAL8VIXuE/Q6XgTaeTdEX/gZKTpZ0SXoD3xEY5vULITr+PTgk3OuQ15gbyF5S2CrsPjDaQ/4eJCPA4/Gy9gQQPHBdg0jpusUH5/X8yuxnc+Xu0BXYSNNQK8j5OmCVqGtxuI3ikuPQ36MU5o4DocX49wkxXKdowT1+IxrK6Aniy+U+OKz93fJyjVSZVq8URx3mm4YK6tEeFF5BP/E5MV+gJHNpBkaJ5SwX2IJQ1c7xUL6BT0O/ZtIAlkWlNn9uXNW+IXzO+r0G/Yv4UF27CyY9vHh57DQY08WfOAPkGf45hGosBijK8Vx42hJve8AfmBxq2P6xO0GWcNJJwt/A2c0ycox4xbG1dIdWKi32B7ycnsO6ycm2onidEyOVHc3ifoVGytCMo3fwiPlD7qgh+MG3ET9qvwxanj2J27LG+V013fyTA+dTm+baxiXDgjZMZ4GMv9CkeMc3WV9QY82rHglzgRsYYhcSA+wKEdSavwdE1QdssnOHaCIBM8N430zpDIS28oFjGeF5Gp3Ay+vsY7E9lxe0ys/GyZT382KtqnnKHzIuOR/IyoXb3T10PjSbklZIhOxg+4szjxrz3C4ryXYD3S4JNxWbm3/etBbWvmTrV2SjUyr9Jbac5wpYmPqhw78jJ393HWBCXvDtzV+ImmwdIra3qqviuvRVDA2eo5K42uzEP1xUoi5uVaYqug8OyNq4qTL64Rl+eZU/cim+E/vUpPrn8Griy+lKk+muyjPxvi9pn4u/XPhsaizA425JPNbqXG7Dkn6G/1w4AlTyOeyQAAAABJRU5ErkJggg=="/>
+                <ul id="user-options">
+                    <li id="logout">Log Out</li>
+                </ul>
+            </a>
+        </div>
+    </header>
+    <main id="blur">
+        <div class="body-header">
+            <h2>Item List</h2>
+            <div class="button-group">
+                <button id="add-item-button">Add Item</button>
+                <button id="add-to-recipe-button" disabled>Add to Recipe</button>
+                <button id="add-to-list-button" disabled>Add to List</button>
+            </div>
+        </div>
+        <div id="item-box" class="content-container">
+            
+        </div>
+    </main>
+    <!-- POPUPS  -->
+
+    <!-- add item popup -->
+    <div class="popup in-app-popup" id="add-item-popup">
+        <h4>Add an Item:</h4>
+        <div class="label-and-textbox">
+            <label for="add-item-name-textbox">Name: </label>
+            <input type="text" class="name-textbox" id="add-item-name-textbox"/>
+        </div>
+        <div class="label-and-textbox">
+            <label for="add-item-quantity-textbox">Default Quanity: </label>
+            <input type="text" class="number-textbox" id="add-item-quantity-textbox"/>
+        </div>
+        <br>
+        <p class="add-item-error-message in-app-popup-error-message">Please fill out all fields.</p>
+        <div class="button-group">
+            <button class="in-app-popup-close-button" id="add-item-close-button">Cancel</button>
+            <button class="in-app-popup-submit-button" id="add-item-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of add item popup -->
+    <!-- add to recipe popup -->
+    <div class="popup in-app-popup" id="add-to-recipe-popup">
+        <h4>Add to Recipe:</h4>
+        <div class="label-and-list">
+            <label for="add-to-recipe-type-dropdown">Recipe Type: </label>
+            <select id="add-to-recipe-type-dropdown">
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <br>
+        <div class="label-and-list" id="add-to-recipe-dropdown-holder">
+            <label for="add-to-recipe-dropdown">Recipe: </label>
+            <select id="add-to-recipe-dropdown"> 
+                <option disabled selected value> -- select an option -- </option>
+            </select>
+        </div>
+        <br>
+        <p class="add-to-quantity-label">Quantities:</p>
+        <div class="item-list" id="add-to-recipe-item-list">
+            
+        </div>
+        <br>
+        <p class="in-app-popup-error-message" id="add-to-recipe-error-message">Please fill out all fields</p>
+        <div class="button-group" id="add-to-recipe-button-group">
+            <button class="in-app-popup-close-button" id="add-to-recipe-close-button">Cancel</button>
+            <button class="in-app-popup-submit-button" id="add-to-recipe-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of add to recipe popup -->
+    <!-- add to list popup -->
+    <div class="popup in-app-popup" id="add-to-list-popup">
+        <h4>Add to List:</h4>
+        <div class="label-and-list">
+            <label for="add-to-list-dropdown">List: </label>
+            <select id="add-to-list-dropdown"> 
+                <option disabled selected value> -- select an option -- </option>
+            </select>
+        </div>
+        <p class="add-to-quantity-label">Quantities:</p>
+        <div class="item-list" id="add-to-list-item-list">
+            
+        </div>
+        <br>
+        <p class="in-app-popup-error-message" id="add-to-list-error-message">Please fill out all fields</p>
+        <div class="button-group" id="add-to-list-button-group">
+            <button class="in-app-popup-close-button" id="add-to-list-close-button">Cancel</button>
+            <button class="in-app-popup-submit-button" id="add-to-list-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of add to list popup -->
+    <!-- new recipe popup -->
+    <div class="popup in-app-popup" id="new-recipe-popup">
+        <h4>New Recipe:</h4>
+        <div class="label-and-textbox">
+            <label for="new-recipe-name-textbox">Name: </label>
+            <input type="text" class="name-textbox" id="new-recipe-name-textbox"/>
+        </div>
+        <br>
+        <div class="label-and-list">
+            <label for="new-recipe-type-dropdown">Recipe Type: </label>
+            <select id="new-recipe-type-dropdown">
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <br>
+        <p class="in-app-popup-error-message" id="new-recipe-error-message">Please enter a recipe name.</p>
+        <div class="button-group">
+            <button class="in-app-popup-close-button" id="new-recipe-close-button">Cancel</button>
+            <button class="in-app-popup-submit-button" id="new-recipe-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of new recipe popup -->
+    <!-- new list popup -->
+    <div class="popup in-app-popup" id="new-list-popup">
+        <h4>New List:</h4>
+        <div class="label-and-textbox">
+            <label for="new-list-name-textbox">Name: </label>
+            <input type="text" class="name-textbox" id="new-list-name-textbox"/>
+        </div>
+        <br>
+        <p class="in-app-popup-error-message" id="new-list-error-message">Please enter a list name.</p>
+        <div class="button-group">
+            <button class="in-app-popup-close-button" id="new-list-close-button">Cancel</button>
+            <button class="in-app-popup-submit-button" id="new-list-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of new list popup -->
+    <!-- edit item popup -->
+    <div class="popup in-app-popup" id="edit-item-popup">
+        <h4>Edit Item:</h4>
+        <div class="label-and-textbox">
+            <label for="edit-item-name-textbox">Name: </label>
+            <input type="text" class="name-textbox" id="edit-item-name-textbox"/>
+        </div>
+        <br>
+        <div class="label-and-textbox">
+            <label for="edit-item-quantity-textbox">Default Quantity: </label>
+            <input type="text" class="number-textbox" id="edit-item-quantity-textbox"/>
+        </div>
+        <br>
+        <p class="in-app-popup-error-message" id="edit-item-popup-error-message">Please fill out all fields.</p>
+        <div class="button-group">
+            <button class="edit-item-popup-close-button" id="edit-item-close-button">Cancel</button>
+            <button class="edit-item-popup-submit-button" id="edit-item-submit-button">OK</button>
+        </div>
+    </div>
+    <!-- end of edit item popup -->
+    <!-- delete item popup -->
+    <div class="popup in-app-popup" id="delete-item-popup">
+        <h4>Delete an Item:</h4>
+        <p id="delete-item-message">Are you sure you want to delete </p>
+        <br>
+        <p class="in-app-popup-error-message delete-item-popup-error-message">Please make a selection.</p>
+        <div class="button-group">
+            <button class="delete-item-popup-close-button" id="delete-item-close-button">No</button>
+            <button class="delete-item-popup-submit-button" id="delete-item-submit-button">Yes</button>
+        </div>
+    </div>
+    <!-- end of delete item popup -->
+
+    <!-- END OF POPUPS -->
+</body>
+</html>

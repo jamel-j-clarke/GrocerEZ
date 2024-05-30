@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root {
+  --primary: #1C6758;
+  --secondary: #3D8361;
+  --tertiary: #D6CDA4;
+  --quartenary: #EEF2E6;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  transition: .5s;
+}
+
+body {
+  background-color: var(--tertiary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+header {
+  width: 100%;
+  display: grid;
+  grid-template-areas: 
+    "header top-right"
+    "bar bar";
+}
+
+header h1 {
+  grid-area: header;
+  padding: 5px 0px 5px 5px;
+  margin: 0;
+  font-size: 40px;
+  display: flex;
+  align-items: flex-end;
+}
+
+header #user-icon, header #user-buttons {
+  grid-area: top-right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 5px;
+}
+
+header #user-icon a img {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+header #user-icon a:hover {
+  cursor: pointer;
+}
+
+header #user-icon a img:hover {
+  background-color: var(--quartenary);
+}
+
+header ul {
+  grid-area: bar;
+  list-style-type: none;
+  padding: 10px 5px 10px 5px;
+  background-color: var(--primary);
+  margin: 0;
+}
+
+header li {
+  display: inline-block;
+  position: relative;
+  padding: 5px;
+  color: var(--quartenary);
+}
+
+header li:hover {
+  background-color: var(--tertiary);
+  color: var(--primary);
+  cursor: pointer;
+}
+
+header li ul {
+  flex-direction: column;
+  list-style: none;
+  padding: none;
+  margin: none;
+  position: absolute;
+  background-color: var(--primary);
+  display: none;
+  top: 100%;
+  left: 0
+}
+
+header li:hover ul {
+  display: block;
+}
+
+#user-icon ul {
+  flex-direction: column;
+  position: absolute;
+  display: none;
+  list-style: none;
+  padding: none;
+  margin: none;
+  background-color: var(--primary);
+  top: 6%;
+  right: 0;
+}
+
+#user-options {
+  border: 1px solid var(--quartenary);
+  z-index: 1;
+}
+
+#user-options li {
+  text-align: center;
+}
+
+#user-icon a:hover ul, #user-icon ul li {
+  display: block;
+}
+
+header li ul li {
+  display: block;
+}
+
+header  li a {
+  text-decoration: none;
+  color:#EEF2E6
+}
+
+header li a:hover {
+  color: var(--primary);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 95vw;
+  height: 80vh;
+}
+
+main .body-header {
+  display: grid;
+  grid-template-areas: 
+    "title buttons";
+}
+
+main .body-header h2 {
+  grid-area: "title";
+}
+
+main>.body-header .button-group {
+  grid-area: "buttons";
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+}
+
+main .body-header .button-group button, header #user-buttons button {
+  height: 50%;
+  margin: 5px 0 5px 5px;
+  background-color: var(--primary);
+  color: var(--quartenary);
+  border: 2px solid var(--primary);
+}
+
+main .body-header .button-group button:hover, header #user-buttons button:hover {
+  background-color: var(--tertiary);
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  cursor: pointer;
+}
+
+main .body-header .button-group button:disabled {
+  height: 50%;
+  margin: 5px 0 5px 5px;
+  background-color: gray;
+  color: var(--quartenary);
+  border: gray;
+}
+
+main .body-header .button-group button:disabled {
+  cursor:auto;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  border: 2px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.content-row {
+  display: inline-flex;
+  border-top: 1px solid var(--primary);
+  border-bottom: 1px solid var(--primary);
+  min-height: 7%;
+}
+
+.current-content-row {
+  display: inline-flex;
+  border-top: 1px solid var(--primary);
+  border-bottom: 1px solid var(--primary);
+  min-height: 5%;
+  padding: 3px;
+}
+
+.content-row .checkbox, .current-content-row .checkbox {
+  display: flex;
+  justify-content: center;
+  min-width: 5%;
+  max-width: 5%;
+}
+
+.content-row .item-name, .current-content-row .item-name {
+  width: 55%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.content-row .details-button, .current-content-row .quantity {
+  display: flex;
+  align-items: center;
+  width: 20%;
+}
+
+.content-row .edit-button, .current-content-row .edit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+}
+
+.content-row .delete-button, .current-content-row .delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+}
+
+.content-row button, .current-content-row button, .popup button {
+  margin: 2px;
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.content-row button:hover, .current-content-row button:hover {
+  background-color: var(--primary);
+  color: var(--quartenary);
+  cursor: pointer;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--primary);
+  max-width: 70%;
+  min-width: 350px;
+  max-height: 60%;
+  min-height: 200px;
+  padding: 5px;
+  box-shadow: 0 5px 30px rgba(0,0,0,.3);
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  background-color: var(--tertiary);
+}
+
+.in-app-popup {
+  max-width: 50%;
+  min-width: 400px;
+  max-height: 60%;
+  min-height: 200px;
+}
+
+.popup .close-button {
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  border: none;
+}
+
+.popup h2 {
+  padding: 15% 0 5% 0;
+  margin: 0;
+}
+
+.popup button:hover {
+  background-color: var(--primary);
+  color: var(--quartenary);
+  cursor: pointer;
+}
+
+.popup form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.popup .input-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.in-app-popup .item-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.in-app-popup .label-and-textbox, .in-app-popup .label-and-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1%;
+  margin: 1%;
+  width: 80%;
+}
+
+.in-app-popup .quantity-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1%;
+  margin: 1%;
+}
+
+.in-app-popup .label-and-textbox label, .in-app-popup .label-and-list label, in-app-popup .quantity-holder label {
+  word-wrap: break-word;
+  text-align: right;
+  width: 30%;
+}
+
+.in-app-popup>.label-and-textbox>input, in-app-popup .quantity-holder input {
+  width: 60%;
+}
+
+.in-app-popup .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#blur.active {
+  filter: blur(7px);
+}
+
+.popup.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+#error-msg {
+  font-size: small;
+  text-align: center;
+}
+
+.VD-list {
+  margin-left: 2%;
+}
+
+.in-app-popup-error-message {
+  font-size: small;
+  text-align: center;
+  display: none;
+}
